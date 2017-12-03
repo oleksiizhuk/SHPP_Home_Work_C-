@@ -22,6 +22,10 @@ class Manager{
         }
         cout<<"add raius: "<<endl;
         cin>>radius;
+        if(radius < 0 || mashrum > 10){
+            cout<<"add correct number mushrooms"<<endl;
+            return 1;
+        }
         for(int i = 0;i < mashrum;i++){
             cout<<"mashrum "<<i<<", coordinate X"<<endl;
             cin>>x[i];
@@ -74,8 +78,8 @@ class Manager{
                     radius+=0.016;
                     rezult+=0.016;
                 }
-
         }
+        cout<<"mushrooms did not touch each other "<<endl;
     }
 };
 int main(){
