@@ -4,7 +4,6 @@ using namespace std;
 
 class Node{
     public:
-
     Node* next;
     int data;
 
@@ -12,17 +11,18 @@ class Node{
     this->data = data;
     next = NULL;
     }
-
 };
 
 class LinkedList{
-    public:
-        Node* head;
+private:
         Node* tail;
         Node* current;
         Node* previous;
-        int length = 0;
+        Node* tmp;
         int counter = 1;
+
+    public:
+        Node* head;
         LinkedList(){
             head = NULL;
             tail = NULL;
@@ -35,7 +35,7 @@ class LinkedList{
                 tail = newNode;
                 return;
             }
-            else{
+            else {
                 tail->next = newNode;
                 tail = newNode;
                 return;
@@ -55,6 +55,7 @@ class LinkedList{
             Node* newNode = new Node(value);
             previous->next = newNode;
             newNode->next = current;
+            counter = 1;
         }
 
         void deletePosition(int index){
@@ -71,10 +72,10 @@ class LinkedList{
             counter = 1;
         }
 
-            void show(Node* n){
-                cout<<n->data<<endl;
-                if(n->next != NULL){
-                    show(n->next);
+            void show(Node* head){
+                cout<<head->data<<endl;
+                if(head->next != NULL){
+                    show(head->next);
                 }
                 return;
             }
@@ -82,16 +83,24 @@ class LinkedList{
 
 int main(){
     LinkedList l;
+    l.addPosition(0,0);
     l.add(10);
     l.add(20);
     l.add(30);
     l.add(40);
-    l.add(50);
+    l.add(60);
+    l.add(70);
+    l.add(80);
+    l.add(90);
+    l.add(100);
     l.show(l.head);
     cout<<"+++++++++++++++++++++++++++"<<endl;
     l.deletePosition(3);
+    l.deletePosition(-90000000000);
+    l.deletePosition(9090909090909090);
     l.show(l.head);
     cout<<"+++++++++++++++++++++++++++"<<endl;
     l.addPosition(45,3);
+    l.addPosition(55,3);
     l.show(l.head);
 };
