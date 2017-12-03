@@ -4,15 +4,18 @@
 #include <cmath>
 
 using namespace std;
-
+const int MAX_MASHRUMS = 10;
 class Manager{
     private:
         double radius = 0;
         int mashrum;
-        double x[10];
-        double y[10];
-        double rezult = 0;
+        double x[MAX_MASHRUMS];
+        double y[MAX_MASHRUMS];
+        double onHowManyMushrooms = 0;
+        const int SHORTEST_DISTANCE = 0;
     public:
+
+        /*add Mashrum and radius*/
     int addMashrum(){
         cout<<"what quantity of mushrooms to add: ";
         cin>>mashrum;
@@ -33,50 +36,52 @@ class Manager{
             cin>>y[i];
         }
     }
-
+        /*computation of distances*/
     double Lenght(int x1, int y1, int x2, int y2){
         return sqrt((double)(x1-x2)*(x1-x2) + (double)(y1-y2)*(y1-y2));
         }
 
     void check(){
-        double dis[mashrum], rad =0;
-        int counter = 0;
+        double distanceBetweenTwoPoints[mashrum], sumOfTheRadiiOfTwoPoints =0 ;
+        int counterDistanceMeter = 0;
         int countSecond = 0;
         double tmp;
         double minRadius = 0;
-
+        /*counter distance*/
         for(int i = 0; i < mashrum; i++){
             for(int n = 1 + i; n < mashrum; n++){
-                cout<<"distanshion mejdu tochkami "<< i <<" and "<<n<<" =  "<<(dis[counter] = Lenght(x[i],y[i],x[n],y[n]))<<" counter = "<<counter<<endl;
-                counter++;
+                cout<<"distanshion mejdu tochkami "<< i <<" and "<<n<<" =  "<<(distanceBetweenTwoPoints[counterDistanceMeter] = Lenght(x[i],y[i],x[n],y[n]))<<" counterDistanceMeter = "<<counterDistanceMeter<<endl;
+                counterDistanceMeter++;
             }
         }
-
-        if (counter > 1){
+        /* Sorting a bubble is needed to sort the most find the shortest distance*/
+        if (counterDistanceMeter > 1){
             for(int i = 0; i < mashrum - 1; i++){
                 for (int n = 0; n < mashrum - 1;n++){
-                    if(dis[n] > dis[n + 1]){
-                        tmp = dis[n];
-                        dis[n] = dis[n + 1];
-                        dis[n + 1] = tmp;
+                    if(distanceBetweenTwoPoints[n] > distanceBetweenTwoPoints[n + 1]){
+                        tmp = distanceBetweenTwoPoints[n];
+                        distanceBetweenTwoPoints[n] = distanceBetweenTwoPoints[n + 1];
+                        distanceBetweenTwoPoints[n + 1] = tmp;
                     }
                 }
             }
         }
-
-        for(int t = 1; t <=60;t++){
+        /*the function is intended to simulate the rain and reads how long
+            it will be before the two fungus
+            touch each other, if not touch, say how much they have grown*/
+        for(int second = 1; second <=60;second++){
             countSecond++;
-            cout<<t<<endl;
-                rad = radius + radius;
-                if(rad>dis[0]){
-                    cout<<"sekond"<<countSecond<<"they grew up on: "<<rad / 2<<" vurosla na: "<<rezult<<endl;
+            cout<<second<<endl;
+                sumOfTheRadiiOfTwoPoints = radius + radius;
+                if(sumOfTheRadiiOfTwoPoints>distanceBetweenTwoPoints[SHORTEST_DISTANCE]){
+                    cout<<"sekond"<<countSecond<<"they grew up on: "<<sumOfTheRadiiOfTwoPoints / 2<<" vurosla na: "<<onHowManyMushrooms<<endl;
                     break;
                     return;
                 }
                 else{
-                    cout<<"mushrooms grew on: "<<rad<<endl;
+                    cout<<"mushrooms grew on: "<<sumOfTheRadiiOfTwoPoints<<endl;
                     radius+=0.016;
-                    rezult+=0.016;
+                    onHowManyMushrooms+=0.016;
                 }
         }
         cout<<"mushrooms did not touch each other "<<endl;
