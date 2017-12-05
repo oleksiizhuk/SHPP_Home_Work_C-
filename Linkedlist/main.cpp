@@ -19,6 +19,7 @@ private:
         Node* current;
         Node* previous;
         Node* tmp;
+        Node* checkNode;
         int counter = 1;
 
     public:
@@ -43,6 +44,22 @@ private:
         }
 
         void addPosition(int value,int index){
+            Node *checkNode = head;
+            Node* newNode = new Node(value);
+            if(checkNode == NULL){
+                cout<<"you do not have a node"<<endl;
+                return;
+            }
+            if(index <= 0){
+                cout<<"pls input correct index"<<endl;
+                return;
+            }
+            if(index == 1){
+                head = newNode;
+                newNode = checkNode;
+                head->next = newNode;
+                return;
+            }
             if(counter == 1){
                 current = head;
             }
@@ -50,26 +67,56 @@ private:
                 counter++;
                 previous = current;
                 current = current->next;
-                addPosition(value,index);
             }
-            Node* newNode = new Node(value);
-            previous->next = newNode;
-            newNode->next = current;
-            counter = 1;
+            if(counter == index){
+                Node* newNode = new Node(value);
+                previous->next = newNode;
+                newNode->next = current;
+                counter = 1;
+                return;
+            }
+            if(previous->next == NULL){
+                cout<<"you add big index"<<endl;
+                counter = 1;
+                return;
+            }
+            addPosition(value,index);
         }
 
         void deletePosition(int index){
+            Node *tmp = head;
+            if(tmp == NULL){
+                cout<<"you do not have a node"<<endl;
+                return;
+            }
+            if(index <= 0){
+                cout<<"pls input correct index"<<endl;
+                return;
+            }
+            if(index == 1){
+                head = head->next;
+            }
             if(counter == 1){
                 current = head;
+                if(current == NULL){
+                    return;
+                }
             }
             if(counter != index){
-                counter++;
                 previous = current;
-                current=current->next;
-                deletePosition(index);
+                current = current->next;
+                counter++;
             }
-            previous->next = current->next;
-            counter = 1;
+            if(current->next == NULL){
+                counter = 1;
+                return;
+            }
+            if(counter == index){
+                previous->next = current->next;
+                counter = 1;
+                return;
+            }
+            deletePosition(index);
         }
 
             void show(Node* head){
@@ -83,24 +130,39 @@ private:
 
 int main(){
     LinkedList l;
-    l.addPosition(0,0);
+    cout<<"delete 0"<<endl;
+    l.deletePosition(0);
+    cout<<"delete 0"<<endl;
+    cout<<"test 77 0"<<endl;
+    l.addPosition(77,0);
+    cout<<"Good test 77 0"<<endl;
+    cout<<"+++++++++++++++++++++++++++"<<endl;
+            cout<<"test 77 123123"<<endl;
+    l.addPosition(77,123123123);
+    cout<<"Good test 77 123123123"<<endl;
+    cout<<"+++++++++++++++++++++++++++"<<endl;
     l.add(10);
     l.add(20);
     l.add(30);
     l.add(40);
-    l.add(60);
-    l.add(70);
-    l.add(80);
-    l.add(90);
-    l.add(100);
+    l.add(50);
     l.show(l.head);
+
+    cout<<"test 77 1"<<endl;
+    l.addPosition(77,1);
+    cout<<"Good test 77 1"<<endl;
     cout<<"+++++++++++++++++++++++++++"<<endl;
-    l.deletePosition(3);
-    l.deletePosition(-90000000000);
-    l.deletePosition(9090909090909090);
     l.show(l.head);
+    cout<<" test 99 100"<<endl;
+    l.addPosition(99,100);
+    cout<<"Good test 99 100"<<endl;
     cout<<"+++++++++++++++++++++++++++"<<endl;
-    l.addPosition(45,3);
-    l.addPosition(55,3);
     l.show(l.head);
+    cout<<" test 99 7"<<endl;
+    l.addPosition(99,6);
+    cout<<"Good test 99 7"<<endl;
+    cout<<"+++++++++++++++++++++++++++"<<endl;
+        l.show(l.head);
+    cout<<"+++++++++++++++++++++++++++"<<endl;
+
 };
