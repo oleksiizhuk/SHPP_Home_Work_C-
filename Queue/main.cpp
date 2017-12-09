@@ -18,7 +18,7 @@ class Queue{
         };
 
         void put(int num){
-            if(check() == SIZE){
+            if(check() == 1){
                 cout<<"Q is full"<<endl;
                 return;
             }
@@ -32,8 +32,9 @@ class Queue{
 
         int get(){
             if(check() == 0){
-                cout<<"queue is empty"<<endl;
-                return 0;
+                cout<<"queue is empty ";
+                *first = *last;
+                return 1;
             }
             elementCount--;
             int d = *first;
@@ -42,11 +43,11 @@ class Queue{
         }
 
         int check(){
-            if(elementCount == 0){
+            if(elementCount == 1){
                 return 0;
             }
-            if(elementCount == SIZE){
-                return 0;
+            if(elementCount == SIZE+1){
+                return 1;
             }
         }
 };
@@ -55,6 +56,7 @@ int main()
 {
     Queue Q;
     for(int i = 1;i < 15;i++){
+        cout<<"i = "<<i<<endl;
         Q.put(i);
     }
         for(int n = 0; n < 15;n++){
