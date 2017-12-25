@@ -36,6 +36,7 @@ class Queue{
                 *first = *last;
                 return 1;
             }
+
             elementCount--;
             int d = *first;
             first++;
@@ -62,6 +63,14 @@ int main()
         for(int n = 0; n < 15;n++){
             cout<<Q.get()<<endl;
         }
+
+    Q.put(11);
+    Q.put(12);
+    Q.put(13);
+    cout<<Q.get()<<endl;
+    cout<<Q.get()<<endl;
+    cout<<Q.get()<<endl;
+    cout<<Q.get()<<endl;
 
     Q.put(11);
     Q.put(12);
